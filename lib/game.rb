@@ -11,7 +11,8 @@ class Game
   end
 
   def roll_die(player)
-    die.roll(player)
+    roll = @die.roll
+    @board.move_player(player, roll)
   end
 
 end

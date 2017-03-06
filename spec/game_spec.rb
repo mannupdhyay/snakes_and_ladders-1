@@ -4,7 +4,7 @@ require 'game'
 describe Game do
   let(:player) { double('player') }
   let(:board) { double('board') }
-  let(:die) { double('die') }
+  let(:die) { double('die', roll: 3) }
 
   subject(:game) { described_class.new(player, board, die) }
 
@@ -43,10 +43,21 @@ describe Game do
       end
     end
     context 'Die' do
-      it "Die is sent 'roll' with player" do
-        allow(die).to receive(:roll)
+      it "Die is sent 'roll'" do
+        allow(die).to receive(:roll).and_return(3)
+        allow(board).to receive(:move_player).with(player, 3)
         game.roll_die(player)
-        expect(game.die).to have_received(:roll).with(player)
+        expect(game.die).to have_received(:roll)
+      end
+    end
+    context 'Moves' do
+      it "A board recives a player's roll" do
+        roll = die.roll
+        allow(board).to receive(:place_new_player).with(player)
+        allow(board).to receive(:move_player).with(player, roll)
+        game.start_game(player)
+        game.roll_die(player)
+        expect(game.board).to have_received(:move_player).with(player, roll)
       end
     end
   end
