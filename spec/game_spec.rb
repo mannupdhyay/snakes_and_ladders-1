@@ -23,5 +23,4 @@ describe Game do
       expect(game.board).to eq board
     end
   end
-
 end
