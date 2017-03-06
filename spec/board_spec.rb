@@ -17,5 +17,10 @@ describe Board do
     it 'A board has a array of 100 squares' do
       expect(board.grid.length).to eq 100
     end
+
+    it 'A new player is placed on the board at grid position 1' do
+      board.place_new_player(player)
+      expect(board.grid[0].first).to eq player
+    end
   end
 end
