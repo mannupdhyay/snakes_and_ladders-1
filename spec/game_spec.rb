@@ -23,4 +23,12 @@ describe Game do
       expect(game.board).to eq board
     end
   end
+
+  context 'New Game' do
+    it "Board is sent 'place_new_player' with player" do
+      allow(board).to receive(:place_new_player).with(player)
+      game.start_game(player)
+      expect(game.board).to have_received(:place_new_player).with(player)
+    end
+  end
 end
