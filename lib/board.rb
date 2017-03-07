@@ -11,6 +11,10 @@ class Board
   end
 
   def check_for_snake(location)
-    @snakes[location]
+    if @snakes[location].nil?
+      location
+    else
+      @snakes[location]
+    end
   end
 end

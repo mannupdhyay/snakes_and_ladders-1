@@ -23,5 +23,9 @@ describe Board do
     it 'A board can contain Snake starting at square 12 that returns 2' do
       expect(board.check_for_snake(12)).to eq 2
     end
+
+    it "A board doesn't a contain Snake starting at square 11" do
+      expect(board.check_for_snake(11)).to eq 11
+    end
   end
 end
