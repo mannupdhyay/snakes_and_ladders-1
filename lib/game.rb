@@ -6,13 +6,12 @@ class Game
     @die = die
   end
 
-  def start_game(player)
-    @board.place_new_player(player)
+  def start_game(player, board)
+    player.place_at_start(board)
   end
 
   def roll_die(player)
     roll = @die.roll
-    @board.move_player(player, roll)
+    player.move_player(roll)
   end
-
 end

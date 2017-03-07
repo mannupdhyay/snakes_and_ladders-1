@@ -13,21 +13,15 @@ describe Game do
       it 'A game can be started' do
         expect(game).to be_an_instance_of Game
       end
-    end
 
-    context 'Player' do
       it 'A game can have a player' do
         expect(game.player).to eq player
       end
-    end
 
-    context 'Board' do
       it 'A game can have a board' do
         expect(game.board).to eq board
       end
-    end
 
-    context 'Die' do
       it 'A game can have a die' do
         expect(game.die).to eq die
       end
@@ -36,28 +30,28 @@ describe Game do
 
   context 'Game-Play' do
     context 'New Game' do
-      it "Board is sent 'place_new_player' with player" do
-        allow(board).to receive(:place_new_player).with(player)
-        game.start_game(player)
-        expect(game.board).to have_received(:place_new_player).with(player)
+      it "player is sent 'place_at_start'" do
+        allow(player).to receive(:place_at_start).with(board)
+        game.start_game(player, board)
+        expect(game.player).to have_received(:place_at_start).with(board)
       end
     end
     context 'Die' do
       it "Die is sent 'roll'" do
         allow(die).to receive(:roll).and_return(3)
-        allow(board).to receive(:move_player).with(player, 3)
+        allow(player).to receive(:move_player).with(3)
         game.roll_die(player)
         expect(game.die).to have_received(:roll)
       end
     end
     context 'Moves' do
-      it "A board recives a player's roll" do
+      it "A player recives a die's roll" do
         roll = die.roll
-        allow(board).to receive(:place_new_player).with(player)
-        allow(board).to receive(:move_player).with(player, roll)
-        game.start_game(player)
+        allow(player).to receive(:place_at_start).with(board)
+        allow(player).to receive(:move_player).with(roll)
+        game.start_game(player, board)
         game.roll_die(player)
-        expect(game.board).to have_received(:move_player).with(player, roll)
+        expect(game.player).to have_received(:move_player).with(roll)
       end
     end
   end
