@@ -13,7 +13,7 @@ describe Player do
     end
   end
   context 'Gameplay' do
-    let(:board) { double('board') }
+    let(:board) { double('board', size: 100) }
     let(:die) { double('die', roll: 3) }
     it 'A new player is placed on the board at grid position 1' do
       allow(board).to receive(:add_player_to_board).with(player)
@@ -35,6 +35,22 @@ describe Player do
         player.move_player(board, die.roll)
       end
       expect(player.location).to eq 2
+    end
+    it 'A player wins if the roll 3 when 3 squares remaining' do
+      allow(board).to receive(:add_player_to_board).with(player)
+      allow(board).to receive(:check_for_snake).and_return(97)
+      player.place_at_start(board)
+      player.move_player(board, 97)
+      expect { player.move_player(board, die.roll) }.to raise_error('player wins')
+    end
+    it 'A player stays on their square if they roll over the remaing squares' do
+      allow(board).to receive(:add_player_to_board).with(player)
+      allow(board).to receive(:check_for_snake).and_return(98)
+      player.place_at_start(board)
+      player.move_player(board, 98)
+      message = 'player stays put as they rolled to many'
+      expect { player.move_player(board, die.roll) }.to raise_error(message)
+      expect(player.location).to eq 98
     end
   end
 end

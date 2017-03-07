@@ -3,7 +3,7 @@ require 'game'
 
 describe Game do
   let(:player) { double('player') }
-  let(:board) { double('board') }
+  let(:board) { double('board', size: 100) }
   let(:die) { double('die', roll: 3) }
 
   subject(:game) { described_class.new(player, board, die) }
