@@ -15,7 +15,7 @@ class Player
     winning_message = 'player wins'
     raise roll_over_message if check_roll_over?(board, roll)
     @location += roll
-    raise winning_message if check_player_win?(board, roll)
+    raise winning_message if check_player_win?(board)
     @location = board.check_for_snake(@location)
   end
 
@@ -25,7 +25,7 @@ class Player
     (@location + roll) > board.size
   end
 
-  def check_player_win?(board, roll)
+  def check_player_win?(board)
     @location == board.size
   end
 
