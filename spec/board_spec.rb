@@ -19,5 +19,9 @@ describe Board do
     it 'A board has a size of 100' do
       expect(board.size).to eq 100
     end
+
+    it 'A board can contain Snake starting at square 12 and ending at 2' do
+      expect(board.check_for_snake(12)).to eq 2
+    end
   end
 end
