@@ -48,37 +48,35 @@ describe Player do
       end
     end
     context 'Snakes' do
-      it 'A player goes to 2 if they land on head of snake at 12' do
+      it 'A player goes to 7 if they land on head of snake at 17' do
         allow(board).to receive(:add_player_to_board).with(player)
-        allow(board).to receive(:check_for_transfer).and_return(3, 6, 9, 2)
+        allow(board).to receive(:check_for_transfer).and_return(7)
         player.place_at_start(board)
-        4.times do |_i|
-          player.move_player(board, die.roll)
-        end
-        expect(player.location).to eq 2
+        player.move_player(board, 17)
+        expect(player.location).to eq 7
       end
       it 'A player stays on square if landing on tail of snake' do
         allow(board).to receive(:add_player_to_board).with(player)
-        allow(board).to receive(:check_for_transfer).and_return(2)
+        allow(board).to receive(:check_for_transfer).and_return(7)
         player.place_at_start(board)
-        player.move_player(board, 2)
-        expect(player.location).to eq 2
+        player.move_player(board, 7)
+        expect(player.location).to eq 7
       end
     end
     context 'Ladders' do
-      it 'A player goes to 17 if they land at bottom of a ladder at 5' do
+      it 'A player goes to 14 if they land at bottom of a ladder at 4' do
         allow(board).to receive(:add_player_to_board).with(player)
-        allow(board).to receive(:check_for_transfer).and_return(17)
+        allow(board).to receive(:check_for_transfer).and_return(14)
         player.place_at_start(board)
-        player.move_player(board, 5)
-        expect(player.location).to eq 17
+        player.move_player(board, 4)
+        expect(player.location).to eq 14
       end
       it 'A player stays on square if landing on top of ladder' do
         allow(board).to receive(:add_player_to_board).with(player)
-        allow(board).to receive(:check_for_transfer).and_return(17)
+        allow(board).to receive(:check_for_transfer).and_return(14)
         player.place_at_start(board)
-        player.move_player(board, 17)
-        expect(player.location).to eq 17
+        player.move_player(board, 14)
+        expect(player.location).to eq 14
       end
     end
   end
