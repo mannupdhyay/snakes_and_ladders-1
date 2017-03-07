@@ -22,9 +22,19 @@ describe Player do
     end
     it 'A player is moved 3 spaces when the dice is rolled' do
       allow(board).to receive(:add_player_to_board).with(player)
+      allow(board).to receive(:check_for_snake).with(3).and_return(3)
       player.place_at_start(board)
-      player.move_player(die.roll)
+      player.move_player(board, die.roll)
       expect(player.location).to eq 3
+    end
+    it 'A player goes to 2 if they land on 12' do
+      allow(board).to receive(:add_player_to_board).with(player)
+      allow(board).to receive(:check_for_snake).and_return(3, 6, 9, 2)
+      player.place_at_start(board)
+      4.times do |_i|
+        player.move_player(board, die.roll)
+      end
+      expect(player.location).to eq 2
     end
   end
 end

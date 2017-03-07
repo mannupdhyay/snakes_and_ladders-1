@@ -10,7 +10,8 @@ class Player
     @location = 0
   end
 
-  def move_player(roll)
+  def move_player(board, roll)
     @location += roll
+    @location = board.check_for_snake(@location)
   end
 end
