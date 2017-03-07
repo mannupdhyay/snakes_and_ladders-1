@@ -3,6 +3,7 @@ class Board
   def initialize
     @players = []
     @size = 100
+    @snakes = { 12 => 2 }
   end
 
   def add_player_to_board(player)
@@ -10,6 +11,6 @@ class Board
   end
 
   def check_for_snake(location)
-    2
+    @snakes[location]
   end
 end
