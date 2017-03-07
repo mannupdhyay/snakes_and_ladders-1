@@ -16,8 +16,7 @@ class Player
     raise roll_over_message if check_roll_over?(board, roll)
     @location += roll
     raise winning_message if check_player_win?(board)
-    @location = board.check_for_snake(@location)
-    @location = board.check_for_ladder(@location)
+    @location = board.check_for_transfer(@location)
   end
 
   private

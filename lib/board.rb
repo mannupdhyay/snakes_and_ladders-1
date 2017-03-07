@@ -3,27 +3,18 @@ class Board
   def initialize
     @players = []
     @size = 100
-    @snakes = { 12 => 2 }
-    @ladders = { 5 => 17 }
+    @transfers = { 12 => 2, 5 => 17 }
   end
 
   def add_player_to_board(player)
     @players.push(player)
   end
 
-  def check_for_snake(location)
-    if @snakes[location].nil?
+  def check_for_transfer(location)
+    if @transfers[location].nil?
       location
     else
-      @snakes[location]
+      @transfers[location]
     end
-  end
-
-  def check_for_ladder(location)
-    if @ladders[location].nil?
-      location
-    else
-      @ladders[location]
-    end
-  end
+  end 
 end

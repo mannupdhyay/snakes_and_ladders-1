@@ -21,11 +21,19 @@ describe Board do
     end
 
     it 'A board can contain Snake starting at square 12 that returns 2' do
-      expect(board.check_for_snake(12)).to eq 2
+      expect(board.check_for_transfer(12)).to eq 2
     end
 
     it "A board doesn't a contain Snake starting at square 11" do
-      expect(board.check_for_snake(11)).to eq 11
+      expect(board.check_for_transfer(11)).to eq 11
+    end
+
+    it 'A board can contain Ladder starting at square 5 that returns 17' do
+      expect(board.check_for_transfer(5)).to eq 17
+    end
+
+    it "A board doesn't a contain Ladder starting at square 13" do
+      expect(board.check_for_transfer(13)).to eq 13
     end
   end
 end
