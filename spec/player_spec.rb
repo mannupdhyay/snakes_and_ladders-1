@@ -30,7 +30,7 @@ describe Player do
       end
     end
     context 'Final moves' do
-      it 'A player wins if the roll 3 when 3 squares remaining' do
+      it 'A player wins if they roll 3 when 3 squares remaining' do
         allow(board).to receive(:add_player_to_board).with(player)
         allow(board).to receive(:check_for_transfer).and_return(97)
         player.place_at_start(board)
