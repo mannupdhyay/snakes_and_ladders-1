@@ -32,6 +32,13 @@ describe Game do
         expect(game.current_player).to eq(player_1)
       end
 
+      it 'A game has a random first player' do
+        allow(game).to receive(:current_player).and_return(player_2)
+        game.add_player(player_1)
+        game.add_player(player_2)
+        expect(game.current_player).to eq(player_2)
+      end
+
       it 'A game can have a board' do
         expect(game.board).to eq board
       end

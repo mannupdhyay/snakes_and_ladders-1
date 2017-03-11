@@ -9,7 +9,7 @@ class Game
 
   def add_player(player)
     @players.push(player)
-    @current_player = @players.first
+    @current_player = @players.sample
   end
 
   def start_game(player, board)
