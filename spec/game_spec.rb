@@ -32,12 +32,7 @@ describe Game do
         expect(game.current_player).to eq(player_1)
       end
 
-      it 'A game has a random first player' do
-        allow(game).to receive(:current_player).and_return(player_2)
-        game.add_player(player_1)
-        game.add_player(player_2)
-        expect(game.current_player).to eq(player_2)
-      end
+
 
       it 'A game can have a board' do
         expect(game.board).to eq board
@@ -51,11 +46,29 @@ describe Game do
 
   context 'Game-Play' do
     context 'New Game' do
+      it 'A game has a random first player' do
+        allow(game).to receive(:current_player).and_return(player_2)
+        game.add_player(player_1)
+        game.add_player(player_2)
+        expect(game.current_player).to eq(player_2)
+      end
       it "player is sent 'place_at_start'" do
         allow(player_1).to receive(:place_at_start).with(board)
         game.add_player(player_1)
-        game.start_game(player_1, board)
+        game.start_game(board)
         expect(player_1).to have_received(:place_at_start).with(board)
+      end
+      it 'The players turn changed after each roll' do
+        allow(player_1).to receive(:place_at_start).with(board)
+        allow(player_1).to receive(:move_player).with(3)
+        allow(player_2).to receive(:place_at_start).with(board)
+        allow(player_2).to receive(:move_player).with(3)
+        game.add_player(player_1)
+        game.add_player(player_2)
+        game.start_game(board)
+        first_player = game.current_player
+        game.roll_die(game.current_player)
+        expect(game.current_player).to_not eq(first_player)
       end
     end
     context 'Die' do
@@ -72,7 +85,7 @@ describe Game do
         roll = die.roll
         allow(player_1).to receive(:place_at_start).with(board)
         allow(player_1).to receive(:move_player).with(roll)
-        game.start_game(player_1, board)
+        game.start_game(board)
         game.roll_die(player_1)
         expect(player_1).to have_received(:move_player).with(roll)
       end
