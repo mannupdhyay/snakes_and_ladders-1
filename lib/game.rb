@@ -9,7 +9,7 @@ class Game
 
   def add_player(player)
     @players.push(player)
-    @current_player = @players.sample
+    choose_first_player
   end
 
   def start_game(player, board)
@@ -20,4 +20,10 @@ class Game
     roll = @die.roll
     player.move_player(roll)
   end
+
+  def choose_first_player
+    @players.shuffle!
+    @current_player = @players.first
+  end
+
 end
