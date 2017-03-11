@@ -27,6 +27,11 @@ describe Game do
         expect(game.players).to include(player_2)
       end
 
+      it 'A game has a current player' do
+        game.add_player(player_1)
+        expect(game.current_player).to eq(player_1)
+      end
+
       it 'A game can have a board' do
         expect(game.board).to eq board
       end
